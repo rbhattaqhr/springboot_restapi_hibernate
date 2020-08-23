@@ -37,10 +37,7 @@ public class NexusRestController
 		{
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
-		else
-		{
-			return new ResponseEntity(HttpStatus.CREATED);
-		}
+		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/addcreditcard", method = RequestMethod.POST, headers = "Accept=application/json")
@@ -58,17 +55,16 @@ public class NexusRestController
 			 orchestraMakePayment();
 			 return "Payment is completed";
 		 }
-		 else
-		 {
-			 return "Unable to create user account";
-		 }
+		 
+		return "Unable to create user account";
+		 
 	}
 	
 	public ResponseEntity<User> orchestraCreateUser()
 	{
 		final String USER_CREATION_URI = "http://localhost:8080/adduser";
 		 
-		User user=new User("Samon Bhatta","10 Barrymore Road, Scarborough","samon@gmail.com");
+	    User user=new User("Samon Bhatta","10 Barrymore Road, Scarborough","samon@gmail.com");
 	    RestTemplate restTemplate = new RestTemplate();
 	    User resonseEntity=restTemplate.postForObject( USER_CREATION_URI, user, User.class);
 	    return new ResponseEntity<User>(resonseEntity, HttpStatus.CREATED);
@@ -78,7 +74,7 @@ public class NexusRestController
 	{
 		final String CREDIT_CARD_INFO_URI = "http://localhost:8080/addcreditcard";
 		 
-		CreditCard creditCard=new CreditCard("123456789123123","05-2022","123", "10 Barrymore Road, Scarborough");
+	CreditCard creditCard=new CreditCard("123456789123123","05-2022","123", "10 Barrymore Road, Scarborough");
 	    RestTemplate restTemplate = new RestTemplate();
 	    restTemplate.postForObject( CREDIT_CARD_INFO_URI, creditCard, CreditCard.class);
 	}
